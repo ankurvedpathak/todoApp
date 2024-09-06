@@ -1,43 +1,70 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import TaskList from './TaskList';
+import Banner from './Banner';
 
-export default function TextBox() {
+export default function TextBox(props) {
+    const {
+        taskCreated, 
+        taskWarning, 
+        taskCompleted, 
+        success, 
+        warning,
+        noNewTasks,
+        noCompletedTasks
+    } = props;
     const [text, setText] = useState("");
     const [taskList, setTaskList] = useState([]);
+    const [bannerText, setBannerText] = useState(null);
+
+    // Function to add a new task
     const onSubmit = () => {
-        if (text){
+        if (text) {
             console.log(text);
             setTaskList(prevList => [...prevList, text]);
+            showBanner(taskCreated,success);
             setText("");
+        } else {
+            showBanner(taskWarning,warning);
         }
     }
 
-    const addTask = (event) => {
+    // To show banner in case of any action performed
+    const showBanner = (message, type) => {
+        setBannerText({
+            message: message,
+            type: type
+        });
+        setTimeout(() => {
+            setBannerText(null);
+        }, 2000);
+    }
+
+    // onchangehandler to allow to enter new characters in textbox
+    const onChangeHandler = (event) => {
         setText(event.target.value);
     }
 
+    // Function to remove task from the main list and move to completed task list
     const removeTask = (id) => {
-        console.log("removing task");
-        console.log(id);
-        console.log(typeof(id));
         var numericId = parseInt(id);
-        console.log(typeof(numericId));
         setTaskList(prevItems => prevItems.filter((value, key) => key !== numericId));
+        showBanner(taskCompleted,success);
     }
-
-    // useEffect(() => {
-    //     console.log(taskList);
-    // },[taskList]);
 
     return (
         <>
+            <Banner bannerText={bannerText}/>
             <div className="input-group my-3">
                 <span className="input-group-text">What are your tasks today?</span>
                 <textarea className="form-control" aria-label="With textarea"
-                    onChange={addTask} value={text}></textarea>
+                    onChange={onChangeHandler} value={text}></textarea>
             </div>
             <button type="button" className="btn btn-primary" onClick={onSubmit}>Add Task</button>
-            <TaskList tasks={taskList} removeTask={removeTask} />
+            <TaskList 
+            tasks={taskList} 
+            noNewTasks={noNewTasks} 
+            removeTask={removeTask} 
+            noCompletedTasks={noCompletedTasks}/>
         </>
     )
 }

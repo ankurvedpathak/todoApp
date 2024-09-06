@@ -4,7 +4,13 @@ import CompletedTasks from './CompletedTasks';
 
 export default function TaskList(props) {
 
-  const {tasks, removeTask } = props;
+  const {
+    tasks,
+    removeTask, 
+    noNewTasks, 
+    noCompletedTasks 
+  } = props;
+  
   const [completedTasks, setCompletedTasks] = useState([]);
   const taskDoneFunction = (event) => {
     const { id, checked } = event.target;
@@ -19,7 +25,7 @@ export default function TaskList(props) {
       <div className="container">
         <h2>Today's Tasks</h2>
         <ul>
-          {tasks.map((item, index) => (
+          {tasks && tasks.map((item, index) => (
             <li key={index} id={index}>
               <input type="checkbox" key={index} id={index} onChange={taskDoneFunction} />
               <label htmlFor={index}>{item}</label>
