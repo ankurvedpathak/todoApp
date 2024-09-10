@@ -4,6 +4,7 @@ import '../css/CompletedTasks.css';
 export default function CompletedTasks(props) {
     const {
         completedTasks,
+        noCompletedTasks,
         style
     } = props;
     return (
@@ -11,13 +12,18 @@ export default function CompletedTasks(props) {
             <div>
                 <div className="container" style={style}>
                     <h2 style={style}>Completed Tasks</h2>
-                    <ul>
-                        {props.completedTasks.map((item, index) => (
+                    {completedTasks.length === 0 ? (
+                        <p style={style}>{noCompletedTasks}</p>
+                    ) : (
+                        <ul>
+                        {completedTasks.map((item, index) => (
                             <li style={style} key={index}>
                                 {item}
                             </li>
                         ))}
                     </ul>
+                    )}
+
                 </div>
             </div>
         </div>

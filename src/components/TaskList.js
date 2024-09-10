@@ -25,17 +25,21 @@ export default function TaskList(props) {
     <div>
       <div className="container" style={style}>
         <h2 style={style}>Today's Tasks</h2>
-        <ul>
-          {tasks && tasks.map((item, index) => (
-            <li style={style} key={index} id={index}>
-              <input type="checkbox" style={style} key={index} id={index} onChange={taskDoneFunction} />
-              <label style={style} htmlFor={index}>{item}</label>
-            </li>
-          ))}
-        </ul>
+        {tasks.length === 0 ? (
+          <p style={style}>{noNewTasks}</p>
+        ) : (
+          <ul>
+            {tasks.map((item, index) => (
+              <li style={style} key={index} id={index}>
+                <input type="checkbox" style={style} key={index} id={index} onChange={taskDoneFunction} />
+                <label style={style} htmlFor={index}>{item}</label>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
       <div className="my-3">
-        <CompletedTasks completedTasks={completedTasks} style={style} />
+        <CompletedTasks completedTasks={completedTasks} noCompletedTasks ={noCompletedTasks} style={style} />
       </div>
     </div>
   )

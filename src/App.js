@@ -6,13 +6,13 @@ function App() {
 
   // Dark Mode color configurations
   // -----------------------------------------------------------------
-  // Specify the background and text color for darkmode and light Mode
+  // Specify the background and text color for dark mode and light mode
   // -----------------------------------------------------------------
     const darkModeBackgroundColor = '#012154';
     const darkModeTextColor = '#ffffff';
     const lightModeBackgroundColor = '#ffffff';
     const lighModeTextColor = '#000000';
-    const darkModeButtonText = 'Enable light mode';
+    const darkModeButtonText = 'Disable dark mode';
     const lightModeButtonText = 'Enable dark mode';
   //------------------------------------------------------------------
 
@@ -56,8 +56,8 @@ function App() {
         taskCompleted={"Yayyy, your task has been completed!"}
         success={"success"}
         warning={"warning"}
-        noNewTasks={"Looks like currently you don't have any news tasks. Start by entering a new task and click Submit"}
-        noCompletedTasks={"You have not completed any tasks yet :("}
+        noNewTasks={"No tasks available. Add some tasks to get started!"}
+        noCompletedTasks={"No tasks have been completed yet. Start by adding new tasks and mark them as you complete them."}
         style={darkMode}
       />
     </div>
