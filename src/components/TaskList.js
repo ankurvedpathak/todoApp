@@ -8,7 +8,8 @@ export default function TaskList(props) {
     tasks,
     removeTask, 
     noNewTasks, 
-    noCompletedTasks 
+    noCompletedTasks ,
+    style
   } = props;
   
   const [completedTasks, setCompletedTasks] = useState([]);
@@ -22,19 +23,19 @@ export default function TaskList(props) {
   }
   return (
     <div>
-      <div className="container">
-        <h2>Today's Tasks</h2>
+      <div className="container" style={style}>
+        <h2 style={style}>Today's Tasks</h2>
         <ul>
           {tasks && tasks.map((item, index) => (
-            <li key={index} id={index}>
-              <input type="checkbox" key={index} id={index} onChange={taskDoneFunction} />
-              <label htmlFor={index}>{item}</label>
+            <li style={style} key={index} id={index}>
+              <input type="checkbox" style={style} key={index} id={index} onChange={taskDoneFunction} />
+              <label style={style} htmlFor={index}>{item}</label>
             </li>
           ))}
         </ul>
       </div>
       <div className="my-3">
-        <CompletedTasks completedTasks={completedTasks} />
+        <CompletedTasks completedTasks={completedTasks} style={style} />
       </div>
     </div>
   )
